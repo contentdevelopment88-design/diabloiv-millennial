@@ -39,7 +39,9 @@ body {
   transform: translateY(-1px);
 }
 
-/* Stronger neutral glow — for the featured tip button */
+/* Featured tip button — always carries the regular glow as its resting
+   state (same look the other buttons show only on hover), and ramps up
+   to a pulsing wider bloom when actually hovered. */
 .glow-hover-strong {
   position: relative;
   transition:
@@ -47,6 +49,11 @@ body {
     transform 280ms ease,
     border-color 280ms ease,
     background-color 280ms ease;
+  box-shadow:
+    0 0 0 1px rgba(255, 255, 255, 0.12),
+    0 0 28px -4px rgba(255, 255, 255, 0.18),
+    0 0 60px -10px rgba(255, 255, 255, 0.10);
+  transform: translateY(-1px);
 }
 .glow-hover-strong:hover {
   box-shadow:
