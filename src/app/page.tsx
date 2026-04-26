@@ -74,7 +74,7 @@ const socials: SocialLink[] = [
 export default function Home() {
   return (
     <main className="relative isolate flex min-h-screen flex-col items-center px-4 py-12 sm:py-16">
-      {/* background */}
+      {/* background — image (2).jpg as the dominant layer */}
       <div className="absolute inset-0 -z-10">
         <Image
           src="/images/hero-bg.jpg"
@@ -82,23 +82,25 @@ export default function Home() {
           fill
           priority
           sizes="100vw"
-          className="object-cover object-center opacity-40"
+          className="object-cover object-center"
         />
-        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0606]/70 via-[#0a0606]/85 to-[#0a0606]" />
-        <div className="absolute inset-0 bg-[radial-gradient(circle_at_50%_30%,transparent_0%,#0a0606_80%)]" />
+        {/* soft top-to-bottom darkening so buttons remain legible without hiding the scene */}
+        <div className="absolute inset-0 bg-gradient-to-b from-[#0a0606]/15 via-[#0a0606]/55 to-[#0a0606]/95" />
+        {/* light vignette to focus the eye on the emblem area */}
+        <div className="absolute inset-0 bg-[radial-gradient(ellipse_at_50%_28%,transparent_0%,rgba(10,6,6,0.55)_85%)]" />
       </div>
 
       <div className="flex w-full max-w-md flex-col items-center gap-7">
-        {/* emblem */}
-        <div className="relative h-32 w-32 sm:h-36 sm:w-36">
-          <div className="absolute inset-0 rounded-full bg-white/5 blur-2xl" />
+        {/* emblem — screen-blended so the PNG's black backdrop disappears
+            and only the lit runes/silhouette/D integrate into the scene */}
+        <div className="relative h-40 w-40 sm:h-48 sm:w-48">
           <Image
             src="/images/emblem.png"
             alt="DiabloIV_Millennial emblem"
             fill
-            sizes="144px"
+            sizes="192px"
             priority
-            className="relative object-contain drop-shadow-[0_4px_24px_rgba(0,0,0,0.6)]"
+            className="object-contain mix-blend-screen drop-shadow-[0_2px_18px_rgba(201,53,44,0.35)]"
           />
         </div>
 
