@@ -6,6 +6,7 @@ type SocialLink = {
   handle: string;
   href: string;
   icon: ReactNode;
+  featured?: boolean;
 };
 
 const socials: SocialLink[] = [
@@ -69,6 +70,17 @@ const socials: SocialLink[] = [
       </svg>
     ),
   },
+  {
+    label: "Tip Jar",
+    handle: "streamlabs.com/diabloiv_millennial",
+    href: "https://streamlabs.com/diabloiv_millennial/tip",
+    featured: true,
+    icon: (
+      <svg viewBox="0 0 24 24" fill="currentColor" aria-hidden="true">
+        <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm-1-12h2v3h3v2h-3v3h-2v-3H8v-2h3V8z" />
+      </svg>
+    ),
+  },
 ];
 
 export default function Home() {
@@ -91,19 +103,6 @@ export default function Home() {
       </div>
 
       <div className="flex w-full max-w-md flex-col items-center gap-7">
-        {/* emblem — screen-blended so the PNG's black backdrop disappears
-            and only the lit runes/silhouette/D integrate into the scene */}
-        <div className="relative h-40 w-40 sm:h-48 sm:w-48">
-          <Image
-            src="/images/emblem.png"
-            alt="DiabloIV_Millennial emblem"
-            fill
-            sizes="192px"
-            priority
-            className="object-contain mix-blend-screen drop-shadow-[0_2px_18px_rgba(201,53,44,0.35)]"
-          />
-        </div>
-
         {/* handle + tagline */}
         <div className="text-center">
           <h1
@@ -117,7 +116,7 @@ export default function Home() {
           </p>
         </div>
 
-        {/* social links */}
+        {/* social links + featured tip jar (uniform layout, stronger hover on tip) */}
         <ul className="mt-2 flex w-full flex-col gap-3">
           {socials.map((s) => (
             <li key={s.label}>
@@ -125,7 +124,9 @@ export default function Home() {
                 href={s.href}
                 target="_blank"
                 rel="noopener noreferrer"
-                className="glow-hover group flex items-center gap-4 rounded-xl border border-white/10 bg-white/[0.03] px-5 py-4 backdrop-blur-sm"
+                className={`${
+                  s.featured ? "glow-hover-strong" : "glow-hover"
+                } group flex items-center gap-4 rounded-xl border border-white/10 bg-white/[0.03] px-5 py-4 backdrop-blur-sm`}
               >
                 <span className="flex h-7 w-7 items-center justify-center text-foreground/90 group-hover:text-foreground">
                   {s.icon}
@@ -148,61 +149,6 @@ export default function Home() {
             </li>
           ))}
         </ul>
-
-        {/* blacksmith tip chest */}
-        <a
-          href="https://streamlabs.com/diabloiv_millennial/tip"
-          target="_blank"
-          rel="noopener noreferrer"
-          className="glow-hover group relative mt-3 flex w-full flex-col items-center gap-2 overflow-hidden rounded-2xl border-2 border-bronze-dim/70 px-6 py-5"
-          style={{
-            background:
-              "linear-gradient(180deg, #2a1a0c 0%, #1a0f06 60%, #110806 100%)",
-            boxShadow:
-              "inset 0 1px 0 0 rgba(184,135,70,0.25), inset 0 -1px 0 0 rgba(0,0,0,0.6)",
-          }}
-        >
-          {/* corner rivets */}
-          <span className="pointer-events-none absolute left-2 top-2 h-2 w-2 rounded-full bg-bronze/70 shadow-[inset_0_-1px_1px_rgba(0,0,0,0.6)]" />
-          <span className="pointer-events-none absolute right-2 top-2 h-2 w-2 rounded-full bg-bronze/70 shadow-[inset_0_-1px_1px_rgba(0,0,0,0.6)]" />
-          <span className="pointer-events-none absolute bottom-2 left-2 h-2 w-2 rounded-full bg-bronze/70 shadow-[inset_0_-1px_1px_rgba(0,0,0,0.6)]" />
-          <span className="pointer-events-none absolute bottom-2 right-2 h-2 w-2 rounded-full bg-bronze/70 shadow-[inset_0_-1px_1px_rgba(0,0,0,0.6)]" />
-
-          {/* lock plate */}
-          <span
-            className="pointer-events-none absolute left-1/2 top-0 h-3 w-12 -translate-x-1/2 rounded-b-md border-x border-b border-bronze-dim/80"
-            style={{ background: "linear-gradient(180deg,#3d2510,#1c0f05)" }}
-          />
-
-          <div className="flex items-center gap-3">
-            {/* anvil + coin icon */}
-            <svg
-              viewBox="0 0 24 24"
-              className="h-6 w-6 text-bronze"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path d="M3 8h13a3 3 0 0 1 3 3v1h2v2h-2v1a3 3 0 0 1-3 3h-1l1.5 3h-3l-1.5-3H10l-1.5 3h-3L7 18H6a3 3 0 0 1-3-3V8zm2 2v5a1 1 0 0 0 1 1h10a1 1 0 0 0 1-1v-5H5z" />
-            </svg>
-            <span
-              className="font-heading text-base font-bold uppercase tracking-[0.3em] text-bronze"
-              style={{ fontFamily: "var(--font-cinzel)" }}
-            >
-              Toss a coin
-            </span>
-            <svg
-              viewBox="0 0 24 24"
-              className="h-6 w-6 text-bronze"
-              fill="currentColor"
-              aria-hidden="true"
-            >
-              <path d="M12 2a10 10 0 1 0 0 20 10 10 0 0 0 0-20zm0 18a8 8 0 1 1 0-16 8 8 0 0 1 0 16zm-1-12h2v3h3v2h-3v3h-2v-3H8v-2h3V8z" />
-            </svg>
-          </div>
-          <span className="text-xs text-bronze/70">
-            Drop gold for the blacksmith
-          </span>
-        </a>
 
         {/* footer */}
         <p className="mt-6 text-[10px] uppercase tracking-[0.4em] text-muted/60">
