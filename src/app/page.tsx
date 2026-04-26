@@ -1,6 +1,12 @@
 import Image from "next/image";
 import type { ReactNode } from "react";
 
+// In production we serve from /diabloiv-millennial/ on GitHub Pages, so
+// static asset paths in <Image> need the prefix manually (Next's basePath
+// doesn't auto-apply to unoptimized images). Empty string in dev.
+const ASSET_PREFIX =
+  process.env.NODE_ENV === "production" ? "/diabloiv-millennial" : "";
+
 type SocialLink = {
   label: string;
   handle: string;
@@ -89,7 +95,7 @@ export default function Home() {
       {/* background — image (2).jpg as the dominant layer */}
       <div className="absolute inset-0 -z-10">
         <Image
-          src="/images/hero-bg.jpg"
+          src={`${ASSET_PREFIX}/images/hero-bg.jpg`}
           alt=""
           fill
           priority
